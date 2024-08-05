@@ -36,6 +36,10 @@ public class OldPhone extends Phone {
         System.out.println("The description of phone is: " + this.descriptions);
     }
 
+    public double calPricePhone(){
+        return getPrice();
+    }
+
     public int getPin() {
         return pin;
     }

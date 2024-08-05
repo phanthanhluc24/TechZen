@@ -2,7 +2,7 @@ package module_2_oop.second_week_1;
 
 import java.util.Scanner;
 
-public class Phone {
+public abstract class Phone {
     private String id;
     private String phoneName;
     private double price;
@@ -48,6 +48,8 @@ public class Phone {
         System.out.println("Day protected of the phone is: " + this.timeProtected);
         System.out.println("Branch of the phone is: " + this.brandCreated);
     }
+
+    public abstract double calPricePhone();
 
     public String getId() {
         return id;

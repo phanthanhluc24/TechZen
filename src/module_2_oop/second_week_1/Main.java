@@ -64,7 +64,12 @@ public class Main {
             case 5:
                 xapXepTheoGia();
                 break;
-
+            case 6:
+                menuSearch();
+                break;
+            case 7:
+                System.out.println("Tinh tong tien tat ca dien thoai "+calPricePhone());
+                break;
         }
     }
 
@@ -309,7 +314,6 @@ public class Main {
         }
     }
 
-
     public static void deleteByIdPhone() {
         String phoneId;
 
@@ -372,7 +376,7 @@ public class Main {
                 number = input.nextInt();
                 input.nextLine();
 
-                switch (number){
+                switch (number) {
                     case 1:
                         xapXepGiaTangDan();
                         break;
@@ -414,6 +418,215 @@ public class Main {
                 }
             }
         }
+    }
+
+    public static void menuSearch() {
+
+
+        int choose;
+
+
+        while (true) {
+            do {
+                System.out.println("== TIM KIEM THONG TIN DIEN THOAI===");
+                System.out.println("1. Tim tat ca dien thoai");
+                System.out.println("2. Tim thong tin dien thoai cu");
+                System.out.println("3. Tim thong tin dien thoai moi");
+                System.out.println("4. Thoat ra man hinh chinh");
+                choose = input.nextInt();
+                input.nextLine();
+                switch (choose) {
+                    case 1:
+                        searchAllPhone();
+                        break;
+                    case 2:
+                        searchOldPhone();
+                        break;
+                    case 3:
+                    case 4:
+                        mainMenu();
+                        break;
+                    default:
+                }
+            } while (choose > 0 && choose <= 4);
+        }
+    }
+
+    public static void searchAllPhone() {
+
+        int choose;
+
+        while (true) {
+            do {
+                System.out.println("===== TIM TAT CA THONG TIN DIEN THOAI===");
+                System.out.println("1. Tim kiem theo gia");
+                System.out.println("2. Tim kiem theo ten san pham");
+                System.out.println("3. Tim kiem theo hang dien thoai");
+                System.out.println("4. Tro ve menu chinh");
+                choose = input.nextInt();
+                input.nextLine();
+                switch (choose) {
+                    case 1:
+                        searchRoundPrice();
+                        break;
+                    case 2:
+                        searchByName();
+                        break;
+                    case 3:
+                        searchByBrandName();
+                        break;
+                    case 4:
+                        mainMenu();
+                    default:
+                        System.out.println("So khong hop le");
+                }
+            } while (choose > 0 && choose <= 4);
+        }
+    }
+
+    public static void searchRoundPrice() {
+        double startPrice, endPrice;
+
+        System.out.println("Nhap vao gia tu: ");
+        startPrice = input.nextDouble();
+        System.out.println("Nhap vao gia den: ");
+        endPrice = input.nextDouble();
+        int count = 1;
+        boolean isPhoneExits = false;
+
+        for (Phone phones : phones) {
+            if (phones.getPrice() >= startPrice && phones.getPrice() <= endPrice) {
+                isPhoneExits = true;
+                System.out.println("Thong tin dien thoai " + (count++));
+                phones.output();
+            }
+        }
+
+        if (!isPhoneExits) {
+            System.out.println("Thong tin dien thoai khong tim thay");
+        }
+    }
+
+    public static void searchByName() {
+        System.out.println("Nhap ten san pham ban muon tim");
+        String namePhone = input.nextLine();
+        boolean isPhoneExits = false;
+        for (Phone phones : phones) {
+            if (phones.getPhoneName().contains(namePhone)) {
+                isPhoneExits = true;
+                phones.output();
+            }
+        }
+        if (!isPhoneExits) {
+            System.out.println("Thong tin dien thoai khong tim thay");
+        }
+    }
+
+    public static void searchByBrandName() {
+        System.out.println("Nhap dong san pham ban muon tim");
+        String brandName = input.nextLine();
+        boolean isPhoneExits = false;
+        for (Phone phones : phones) {
+            if (phones.getBrandCreated().contains(brandName)) {
+                isPhoneExits = true;
+                phones.output();
+            }
+        }
+        if (!isPhoneExits) {
+            System.out.println("Thong tin dien thoai khong tim thay");
+        }
+    }
+
+    public static void searchOldPhone() {
+        int choose;
+
+        while (true) {
+            do {
+                System.out.println("===== TIM THONG TIN DIEN THOAI CU ===");
+                System.out.println("1. Tim kiem theo gia");
+                System.out.println("2. Tim kiem theo ten san pham");
+                System.out.println("3. Tim kiem theo hang dien thoai");
+                System.out.println("4. Tro ve menu chinh");
+                choose = input.nextInt();
+
+                switch (choose) {
+                    case 1:
+                        searchPriceOldPhone();
+                        break;
+                    case 2:
+                        searchByOldName();
+                        break;
+                    case 3:
+                        searchByOldBrand();
+                        break;
+                    case 4:
+                        mainMenu();
+                    default:
+                        System.out.println("So khong hop le");
+                }
+            } while (choose > 0 && choose <= 4);
+        }
+    }
+
+    public static void searchPriceOldPhone() {
+        double startPrice, endPrice;
+
+        System.out.println("Nhap vao gia tu: ");
+        startPrice = input.nextDouble();
+        System.out.println("Nhap vao gia den: ");
+        endPrice = input.nextDouble();
+        int count = 1;
+        boolean isPhoneExits = false;
+
+        for (OldPhone oldPhone : oldPhone) {
+            if (oldPhone.getPrice() >= startPrice && oldPhone.getPrice() <= endPrice) {
+                isPhoneExits = true;
+                System.out.println("Thong tin dien thoai " + (count++));
+                oldPhone.output();
+            }
+        }
+
+        if (!isPhoneExits) {
+            System.out.println("Thong tin dien thoai khong tim thay");
+        }
+    }
+
+    public static void searchByOldName() {
+        System.out.println("Nhap ten san pham ban muon tim");
+        String namePhone = input.nextLine();
+        boolean isPhoneExits = false;
+        for (OldPhone oldPhone : oldPhone) {
+            if (oldPhone.getPhoneName().contains(namePhone)) {
+                isPhoneExits = true;
+                oldPhone.output();
+            }
+        }
+        if (!isPhoneExits) {
+            System.out.println("Thong tin dien thoai khong tim thay");
+        }
+    }
+
+    public static void searchByOldBrand() {
+        System.out.println("Nhap dong san pham ban muon tim");
+        String brandName = input.nextLine();
+        boolean isPhoneExits = false;
+        for (OldPhone oldPhone : oldPhone) {
+            if (oldPhone.getBrandCreated().contains(brandName)) {
+                isPhoneExits = true;
+                oldPhone.output();
+            }
+        }
+        if (!isPhoneExits) {
+            System.out.println("Thong tin dien thoai khong tim thay");
+        }
+    }
+
+    public static double calPricePhone(){
+        double total =0.0;
+        for (Phone phone:phones){
+            total+=phone.calPricePhone();
+        }
+        return total;
     }
 
 }

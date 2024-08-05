@@ -29,6 +29,10 @@ public class NewPhone extends Phone {
         System.out.println("The quantity of new phone is: " + this.quantity);
     }
 
+    public double calPricePhone(){
+        return getPrice() * getQuantity();
+    }
+
     public int getQuantity() {
         return quantity;
     }
